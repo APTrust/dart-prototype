@@ -17,8 +17,10 @@ APTrust's production repository since March of 2018.
 
 The code in the master branch of this project represents a working prototype.
 It does its job, but it is not maintainable. (It's always a bad sign when the
-person who wrote the code no longer understands it.) The [refactor branch](https://github.com/APTrust/dart/tree/refactor),
-begun in July, 2018, will clean up the code to a point where others can contribute.
+person who wrote the code no longer understands it.)
+
+New code intended for long-term maintainability is in the main [DART repository](https://github.com/APTrust/dart)
+That rewrite will clean up the code to a point where others can contribute.
 The refactor will:
 
  * properly separate concerns
