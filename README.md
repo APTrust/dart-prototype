@@ -1,7 +1,6 @@
 # APTrust DART-Prototype
 [![Build Status](https://travis-ci.org/APTrust/dart-prototype.svg?branch=master)](https://travis-ci.org/APTrust/dart-prototype)
-[![Build status](https://ci.appveyor.com/api/projects/status/i1iw82rndp0qwso2?svg=true
-](https://ci.appveyor.com/project/cdahlhausen/dart-prototype)
+[![Build status](https://ci.appveyor.com/api/projects/status/i1iw82rndp0qwso2?svg=true)](https://ci.appveyor.com/project/cdahlhausen/dart-prototype)
 [![Maintainability](https://api.codeclimate.com/v1/badges/8b51be47cf6ed6aaa698/maintainability)](https://codeclimate.com/github/APTrust/dart-prototype/maintainability)
 
 DART is the Digital Artefact Routing Tool. It provides a simple way of packing
