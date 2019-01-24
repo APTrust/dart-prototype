@@ -55,7 +55,7 @@ deploy:
   bucket: aptrust.public.download
   region: us-east-1
   set_public: true
-  folder: DART
+  folder: DART-Prototype
 #  artifact: DART-Windows
   reduced_redundancy: true
 
