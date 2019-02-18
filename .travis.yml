@@ -19,38 +19,32 @@ install:
 before_script:
 - git lfs pull
 script:
-- if [[ "$TRAVIS_BRANCH" == "refactor" ]]; then cd refactor && npm test && cd ..;
-  fi
+- if [[ "$TRAVIS_BRANCH" == "refactor" ]]; then cd refactor && npm test && cd ..; fi
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then cd electron && yarn; fi
-- buildver="$(grep version electron/package.json |sed "s/[^0-9.]//g").$(git log --format=%h
-  -1)"
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cd electron && yarn && electron-builder
-  -p never --em.version=$buildver; fi
+- buildver="$(grep version electron/package.json |sed "s/[^0-9.]//g").$(git log --format=%h -1)"
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cd electron && yarn && electron-builder -p never --em.version=$buildver; fi
 addons:
   artifacts:
     working_dir: dist
     paths:
     - $(git ls-files -o dist/{*.dmg,*.exe,*.deb} | tr "\n" ":")
     target_paths:
-    - "/app/build-${TRAVIS_BUILD_NUMBER}_commit-${TRAVIS_COMMIT:0:7}$([ ! -z ${TRAVIS_TAG}
-      ] && echo _tag-${TRAVIS_TAG})"
+    - "/app/build-${TRAVIS_BUILD_NUMBER}_commit-${TRAVIS_COMMIT:0:7}$([ ! -z ${TRAVIS_TAG}] && echo _tag-${TRAVIS_TAG})"
     - DART-Prototype/DART-$buildver.dmg
     bucket: aptrust.public.download
-    key:
-        secure: "biMU/WdkBL+1o1L2jPZCEhgo3PMfnBdO/g5OPVKwR1skeGxU22o0e0rW/iGucMbmhpFWZUz/l8pVHAGJslT23nMkx2e3+O4JQEteGWTb5rj9R8cNT2zrZnXyXTQ71OEus0PgX0WQ4YfnxyPGupSaPSPP4o/hY4VxAAxmAUXaocyuGPOXHGPUkrceMyD/Nq65WRKqptHR1kO9PCuv/4CLnNKITmpl11e/AvkCug7xbFF0gGeghzYtZ4qNodaFE208ziuzQLEjOp2Et28nGc1K7Qdxtv755r/gjWNHpq5/ccJmiTghFTynCcih9A8z1M8YXcHq5tDHODrxBfqAcY7+6/Y5pKby7nPPBL/wJ2Fp94lOE3eu1tpPeaYP3THKkWwKo6qnnI64HlF57atdY4JwlCVkGlUA3iHpJf66sJMWKcyfj7O10b56DaKIU1OKwd6UJJvzntXNVOjg6/gXffl2IF8GbhwY2YRb1rDki7hmp3Pm8maHiWJmRZ5LvMxZJDL9tY6zMKqiKd9jNgKP5bk46AG/anpGuLaJp2UzkyCGXlD93s22qpiSpN0vmFCwIEhrPJFVaHjShELmcAyTRqcR3BGAULYu8Lb6LJnnwqtcsw3TI/YS4y3ly7wBOtwVYnm4nc4TStfBJJGj13dIbvrCgterWK2d8IDvkPjuXLBilAs="
+    key: $AWS_ACCESS_KEY_ID
     secret:
-        secure: "h/lq1HvrUPorfnBgHjDpU2G8CKsjrQoDN8BKlXaP9sWoexOlSPii7KTmp2tb4b1cbumEumXwV40sLMhRrGmZcg0I0wh6gRFWmcv8DdZ67OVahOzm20c3t5SOoPZ9EO0RtUqDbL/4Da95B26N6kOd1f/ehV5kVUm/EanRVwJ/KTnrG6RwcPsQbc5GrFfdnYhxoAhCdWVnxgEgL2sysc803c76kCOzBPq3kdmdPZ/77Ekyfl1Lvjg4K+GUZPcbYgy7ElhMIe2sRdvi6JQ2DoHemfrvzjX0/OnvLC1UcRCm6x58pbDAbnhdAhSluqM+W4pXDzvV/GZzi5geWYWFSziAWmuzbrHCu/E7yS7rKgv8/BWp8RnEP8hzUU9py3/A5dNLwNqj6OgpMbrWA7kybEhR59ejUQchshZOPZVAnvhOokL2YvZIcLEZnkhvBQ/OKUSVF4/jB4t+6aqouV3J6ZfvsHbEByne7dC0lMg/Zi0CVdnzKtTeeS3my15Gab7+EpffTBvq+WmkuKOa09rODuCB5GNmmi4nAtJm3JEEttCP9ZR27Coz2kbKeIMhytwGuhVwFER37i3vpxelxuZmn9B7+D+bwQuaBY2FBdbxpmEwmhs6DeVTT6eMYyAW4s6I2Ju1WRgFf81mlKOP6mVzXE7spYUPGiCe86o6sGU3QejK6mg="
+      secure: jO8AakBnlOk2xtNk1UOQCzW4dsrELMvlxZufB2KslmxVEfsOk72ymj0jQBE4iPu55LgFzOF3ur/peurPobsDvP70V+w0GUCiE/XwNdIK4zkdZu3KCok3tznKGSiFgMX+1uiBKhDqZ7e85naBjxI2u+VQyWTPt2BEmMykKhg1tv4hYFv+CLOU4cVnoSkTEktbz8RKjMSgIEc6tt2UCZy2OXjoyIcrmnEcCJOJVzg0M7lCBSqwcvXmsoJ+Y+GaoNZg3mQqRFqv1r7E4PfV4HpjJDKjJ024wZqKxkmM59qJeLJBz37JzbAmuI18AGnkx2E/TMKZdOpcy9WmL4WRsprZuEjx+b5G0evY008dD+gR9Cs7mDipTD8K53C0ztnYMZYVj6Xt6J7jLugPvKmnr3XFeAT49k9K8pDMAM7Q/Sf+GKCUXkcWmnPPzoe6k9LN5ks1ZIcpvsR4GEQv0K08EDc/rCdnbKAwUgXBDF0ejt0dTLOqNC6MNn7pVqEVCjmhrPdkAWrwnR+Pdahb+AC87qKM4r5VBIIl7Qro9eDtcfep0cEkvc3mCxpYwo+cTqjPI1SarJjt8xO+AapAurG0ppdZhTx9fGVd0UY9Q6jI0TWds5H1c94NqvEed5pA2xCHK97JbhsrDy0rTm6d6PPTSTv5pCaY9+UZTtRuWcMDVo9kJeA=
 deploy:
   provider: s3
-  access_key_id:
-    secure: "biMU/WdkBL+1o1L2jPZCEhgo3PMfnBdO/g5OPVKwR1skeGxU22o0e0rW/iGucMbmhpFWZUz/l8pVHAGJslT23nMkx2e3+O4JQEteGWTb5rj9R8cNT2zrZnXyXTQ71OEus0PgX0WQ4YfnxyPGupSaPSPP4o/hY4VxAAxmAUXaocyuGPOXHGPUkrceMyD/Nq65WRKqptHR1kO9PCuv/4CLnNKITmpl11e/AvkCug7xbFF0gGeghzYtZ4qNodaFE208ziuzQLEjOp2Et28nGc1K7Qdxtv755r/gjWNHpq5/ccJmiTghFTynCcih9A8z1M8YXcHq5tDHODrxBfqAcY7+6/Y5pKby7nPPBL/wJ2Fp94lOE3eu1tpPeaYP3THKkWwKo6qnnI64HlF57atdY4JwlCVkGlUA3iHpJf66sJMWKcyfj7O10b56DaKIU1OKwd6UJJvzntXNVOjg6/gXffl2IF8GbhwY2YRb1rDki7hmp3Pm8maHiWJmRZ5LvMxZJDL9tY6zMKqiKd9jNgKP5bk46AG/anpGuLaJp2UzkyCGXlD93s22qpiSpN0vmFCwIEhrPJFVaHjShELmcAyTRqcR3BGAULYu8Lb6LJnnwqtcsw3TI/YS4y3ly7wBOtwVYnm4nc4TStfBJJGj13dIbvrCgterWK2d8IDvkPjuXLBilAs="
+  access_key_id: $AWS_ACCESS_KEY_ID
   secret_access_key:
-    secure: "h/lq1HvrUPorfnBgHjDpU2G8CKsjrQoDN8BKlXaP9sWoexOlSPii7KTmp2tb4b1cbumEumXwV40sLMhRrGmZcg0I0wh6gRFWmcv8DdZ67OVahOzm20c3t5SOoPZ9EO0RtUqDbL/4Da95B26N6kOd1f/ehV5kVUm/EanRVwJ/KTnrG6RwcPsQbc5GrFfdnYhxoAhCdWVnxgEgL2sysc803c76kCOzBPq3kdmdPZ/77Ekyfl1Lvjg4K+GUZPcbYgy7ElhMIe2sRdvi6JQ2DoHemfrvzjX0/OnvLC1UcRCm6x58pbDAbnhdAhSluqM+W4pXDzvV/GZzi5geWYWFSziAWmuzbrHCu/E7yS7rKgv8/BWp8RnEP8hzUU9py3/A5dNLwNqj6OgpMbrWA7kybEhR59ejUQchshZOPZVAnvhOokL2YvZIcLEZnkhvBQ/OKUSVF4/jB4t+6aqouV3J6ZfvsHbEByne7dC0lMg/Zi0CVdnzKtTeeS3my15Gab7+EpffTBvq+WmkuKOa09rODuCB5GNmmi4nAtJm3JEEttCP9ZR27Coz2kbKeIMhytwGuhVwFER37i3vpxelxuZmn9B7+D+bwQuaBY2FBdbxpmEwmhs6DeVTT6eMYyAW4s6I2Ju1WRgFf81mlKOP6mVzXE7spYUPGiCe86o6sGU3QejK6mg="
+    secure: jO8AakBnlOk2xtNk1UOQCzW4dsrELMvlxZufB2KslmxVEfsOk72ymj0jQBE4iPu55LgFzOF3ur/peurPobsDvP70V+w0GUCiE/XwNdIK4zkdZu3KCok3tznKGSiFgMX+1uiBKhDqZ7e85naBjxI2u+VQyWTPt2BEmMykKhg1tv4hYFv+CLOU4cVnoSkTEktbz8RKjMSgIEc6tt2UCZy2OXjoyIcrmnEcCJOJVzg0M7lCBSqwcvXmsoJ+Y+GaoNZg3mQqRFqv1r7E4PfV4HpjJDKjJ024wZqKxkmM59qJeLJBz37JzbAmuI18AGnkx2E/TMKZdOpcy9WmL4WRsprZuEjx+b5G0evY008dD+gR9Cs7mDipTD8K53C0ztnYMZYVj6Xt6J7jLugPvKmnr3XFeAT49k9K8pDMAM7Q/Sf+GKCUXkcWmnPPzoe6k9LN5ks1ZIcpvsR4GEQv0K08EDc/rCdnbKAwUgXBDF0ejt0dTLOqNC6MNn7pVqEVCjmhrPdkAWrwnR+Pdahb+AC87qKM4r5VBIIl7Qro9eDtcfep0cEkvc3mCxpYwo+cTqjPI1SarJjt8xO+AapAurG0ppdZhTx9fGVd0UY9Q6jI0TWds5H1c94NqvEed5pA2xCHK97JbhsrDy0rTm6d6PPTSTv5pCaY9+UZTtRuWcMDVo9kJeA=
   bucket: aptrust.public.download
   local-dir: dist
   upload-dir: DART-Prototype
   acl: public_read
-  skip_cleanup: true
+  skip_cleanup: yes
   on:
     repo: APTrust/dart-prototype
 notifications:
