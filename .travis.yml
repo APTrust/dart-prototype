@@ -46,7 +46,7 @@ deploy:
     secure: eOwbN81+m8xAntNpef0zDMrsz6ZzEry9ZRvnxjvL9izpo9IlIAPwlPtDrLMlAv9Nf1g1WJvAUt25NelSRoApLsBbSZohdyMyy0AlC+KiyXv6sHVMhzmZQ2WFPg/atQkg+WwxQsizRur2VWaqR0Ke2K0cFmlo0HZm+w3iEJt8Y8lGewsAe9AcHLoxd8hFtABnijfeHq0fUzzLSgpdme9UTDGgO3HSj7I4B01+Rfq00W5u3RPZVqqff8bErQKC+8ZAYC1HAgM3FnK/m+vzwNkOl6m9t5xiUiNXGCaCb3/zRR8ZH/snFup8xKJwikNfLlxGkEpkfH+mlcNzER3e3xRF3m2eZO410spoLa/9PkI5GRfv2ZX+tm8mNpqZjU5v1BHmsirdspzJ2uVTH456yM2RfS46M202OuX7W1i7HMmliRNRNgvvsYnNqgSxiPI2283xJxSmfn0UysuMe4he+zVM5SIqu6Bhx0zrrSw9oLP4vTCYjnzlNMFqDcxlsjLOfi1aCM8fxnEBCSupHbEMTIqSNfL7lMqhBiGbHp0CUVWuj37Z7BAjZLmvtndV25Ju3AnOOMybzk+6KpKZhGwdYQWnN48Z28r3kqKyZESdx44Z+LA8SxRuiOBqvL/R0qCcZfqATxvmW+aPkFj9cjASro92WWVR8niNg2v7aLXXH1GJIEQ=
   bucket: aptrust.public.download
   local-dir: dist
-  upload-dir: DART
+  upload-dir: DART-Prototype
   acl: public_read
   skip_cleanup: true
   on:
