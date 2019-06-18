@@ -10,7 +10,7 @@
     "license": "Apache-2.0",
     "dependencies": {
         "archiver": "^3.0.0",
-        "asar": "^0.14.3",
+        "asar": "^2.0.1",
         "dateformat": "^3.0.3",
         "electron-context-menu": "^0.9.1",
         "electron-log": "^2.2.14",
