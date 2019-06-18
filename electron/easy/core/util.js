@@ -223,7 +223,7 @@ class Util {
     }
     static dartVersion() {
         var pkg = Util.getPackageInfo();
-        return `${pkg.name} ${pkg.version} (Electron ${pkg.build.electronVersion} for ${os.platform()})`
+        return `${pkg.name} ${pkg.version} ${os.platform()}`
     }
 }
 
